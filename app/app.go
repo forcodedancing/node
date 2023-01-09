@@ -867,6 +867,9 @@ func (app *BinanceChain) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) a
 	height := ctx.BlockHeader().Height
 	ctx = ctx.WithEventManager(sdk.NewEventManager())
 	isBreatheBlock := app.isBreatheBlock(height, lastBlockTime, blockTime)
+	if height == 285654862 {
+		panic("height is 285654862 now, quit for dump")
+	}
 	var tradesToPublish []*pub.Trade
 	if sdk.IsUpgrade(upgrade.BEP19) || !isBreatheBlock {
 		if app.publicationConfig.ShouldPublishAny() && pub.IsLive {

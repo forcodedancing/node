@@ -853,6 +853,10 @@ func (app *BinanceChain) isBreatheBlock(height int64, lastBlockTime time.Time, b
 
 func (app *BinanceChain) BeginBlocker(ctx sdk.Context, req abci.RequestBeginBlock) (res abci.ResponseBeginBlock) {
 	upgrade.Mgr.BeginBlocker(ctx)
+	height := ctx.BlockHeader().Height
+	if height == 285654862 {
+		panic("height is 285654862 now, quit for dump")
+	}
 	return
 }
 

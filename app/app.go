@@ -970,9 +970,9 @@ func (app *BinanceChain) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) a
 	// match may end with transaction failure, which is better to save into
 	// the EndBlock response. However, current cosmos doesn't support this.
 
-	if sdk.IsUpgrade(upgrade.EnableReconciliation) {
-		app.reconBalance(ctx)
-	}
+	//if sdk.IsUpgrade(upgrade.EnableReconciliation) {
+	app.reconBalance(ctx)
+	//}
 
 	return abci.ResponseEndBlock{
 		ValidatorUpdates: validatorUpdates,

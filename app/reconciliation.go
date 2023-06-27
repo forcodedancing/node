@@ -44,6 +44,7 @@ func (app *BinanceChain) reconBalance(ctx sdk.Context) {
 	if !accountDiff.IsEqual(tokenDiff) {
 		ctx.Logger().Error(fmt.Sprintf("unbalanced at block %d, account diff: %s, token diff: %s \n",
 			ctx.BlockHeight(), accountDiff.String(), tokenDiff.String()))
+		panic("not balanced")
 		app.saveUnbalancedBlockHeight(ctx)
 	}
 }

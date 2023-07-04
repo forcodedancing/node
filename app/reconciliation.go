@@ -53,7 +53,7 @@ func (app *BinanceChain) getAccountChanges(ctx sdk.Context, accountStore *store.
 			var acc1 sdk.Account
 			err := app.Codec.UnmarshalBinaryBare(v, &acc1)
 			if err != nil {
-				ctx.Logger().Error("recon fail to unmarshal current value", "value", fmt.Sprintf("%x", v))
+				ctx.Logger().Error("recon fail to unmarshal current value", "key", []byte(k), "value", fmt.Sprintf("%x", v))
 				panic("failed to unmarshal current value " + err.Error())
 			}
 			nacc1 := acc1.(types.NamedAccount)
@@ -68,6 +68,7 @@ func (app *BinanceChain) getAccountChanges(ctx sdk.Context, accountStore *store.
 			var acc2 sdk.Account
 			err := app.Codec.UnmarshalBinaryBare(v, &acc2)
 			if err != nil {
+				ctx.Logger().Error("recon fail to unmarshal previous value", "key", []byte(k), "value", fmt.Sprintf("%x", v))
 				panic("failed to unmarshal previous value " + err.Error())
 			}
 			nacc2 := acc2.(types.NamedAccount)
@@ -95,6 +96,7 @@ func (app *BinanceChain) getTokenChanges(ctx sdk.Context, tokenStore *store.Iavl
 			var token1 types.IToken
 			err := app.Codec.UnmarshalBinaryBare(v, &token1)
 			if err != nil {
+				ctx.Logger().Error("recon fail to unmarshal current value", "key", []byte(k), "value", fmt.Sprintf("%x", v))
 				panic("failed to unmarshal current value " + err.Error())
 			}
 			ctx.Logger().Debug("current token", "symbol", token1.GetSymbol(), "supply", token1.GetTotalSupply().ToInt64())
@@ -108,6 +110,7 @@ func (app *BinanceChain) getTokenChanges(ctx sdk.Context, tokenStore *store.Iavl
 			var token2 types.IToken
 			err := app.Codec.UnmarshalBinaryBare(v, &token2)
 			if err != nil {
+				ctx.Logger().Error("recon fail to unmarshal previous value", "key", []byte(k), "value", fmt.Sprintf("%x", v))
 				panic("failed to unmarshal previous value " + err.Error())
 			}
 			ctx.Logger().Debug("previous token", "symbol", token2.GetSymbol(), "supply", token2.GetTotalSupply().ToInt64())

@@ -53,6 +53,9 @@ func (app *BinanceChain) getAccountChanges(ctx sdk.Context, accountStore *store.
 			var acc1 sdk.Account
 			err := app.Codec.UnmarshalBinaryBare(v, &acc1)
 			if err != nil {
+				fmt.Println("key:", k)
+				fmt.Printf("%08b\n", []byte(k))
+				fmt.Printf("%x\n", []byte(k))
 				ctx.Logger().Error("recon fail to unmarshal current value", "key", []byte(k), "value", fmt.Sprintf("%x", v))
 				panic("failed to unmarshal current value " + err.Error())
 			}

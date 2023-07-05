@@ -2,7 +2,6 @@ package app
 
 import (
 	"encoding/binary"
-	"fmt"
 	"strings"
 
 	"github.com/cosmos/cosmos-sdk/store"
@@ -19,10 +18,10 @@ var unbalancedBlockHeightKey = []byte("0x01")
 
 // reconBalance will do reconciliation for accounts balances.
 func (app *BinanceChain) reconBalance(ctx sdk.Context, accountIavl *store.IavlStore, tokenIavl *store.IavlStore) {
-	height, exists := app.getUnbalancedBlockHeight(ctx)
-	if exists {
-		panic(fmt.Sprintf("unbalanced state at block height %d, please use hardfork to bypass it", height))
-	}
+	//height, exists := app.getUnbalancedBlockHeight(ctx)
+	//if exists {
+	//	panic(fmt.Sprintf("unbalanced state at block height %d, please use hardfork to bypass it", height))
+	//}
 
 	accPre, accCurrent := app.getAccountChanges(ctx, accountIavl)
 	tokenPre, tokenCurrent := app.getTokenChanges(ctx, tokenIavl)
@@ -32,9 +31,7 @@ func (app *BinanceChain) reconBalance(ctx sdk.Context, accountIavl *store.IavlSt
 	tokenDiff := tokenCurrent.Plus(tokenPre.Negative())
 
 	if !accountDiff.IsEqual(tokenDiff) {
-		ctx.Logger().Error(fmt.Sprintf("unbalanced at block %d, account diff: %s, token diff: %s \n",
-			ctx.BlockHeight(), accountDiff.String(), tokenDiff.String()))
-		app.saveUnbalancedBlockHeight(ctx)
+		panic("note balanced")
 	}
 }
 

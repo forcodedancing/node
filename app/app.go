@@ -971,9 +971,9 @@ func (app *BinanceChain) EndBlocker(ctx sdk.Context, req abci.RequestEndBlock) a
 
 	accountIavl, _ := app.GetCommitMultiStore().GetCommitStore(common.AccountStoreKey).(*store.IavlStore)
 	tokenIavl, _ := app.GetCommitMultiStore().GetCommitStore(common.TokenStoreKey).(*store.IavlStore)
-	if sdk.IsUpgrade(upgrade.BEP255) {
-		app.reconBalance(ctx, accountIavl, tokenIavl)
-	}
+	//if sdk.IsUpgrade(upgrade.BEP255) {
+	app.reconBalance(ctx, accountIavl, tokenIavl)
+	//}
 	accountIavl.ResetDiff()
 	tokenIavl.ResetDiff()
 

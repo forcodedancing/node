@@ -3,6 +3,7 @@ package app
 import (
 	"encoding/binary"
 	"fmt"
+	"strings"
 
 	"github.com/cosmos/cosmos-sdk/store"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -48,7 +49,7 @@ func (app *BinanceChain) getAccountChanges(ctx sdk.Context, accountStore *store.
 	diff := accountStore.GetDiff()
 	version := accountStore.GetTree().Version() - 1
 	for k := range diff {
-		if k == globalAccountNumber {
+		if strings.Contains(k, globalAccountNumber) {
 			continue
 		}
 		v := accountStore.Get([]byte(k))

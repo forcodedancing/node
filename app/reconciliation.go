@@ -18,6 +18,9 @@ var unbalancedBlockHeightKey = []byte("0x01")
 
 // reconBalance will do reconciliation for accounts balances.
 func (app *BinanceChain) reconBalance(ctx sdk.Context, accountIavl *store.IavlStore, tokenIavl *store.IavlStore) {
+	if ctx.BlockHeight() <= 2 {
+		return
+	}
 	height, exists := app.getUnbalancedBlockHeight(ctx)
 	if exists {
 		panic(fmt.Sprintf("unbalanced state at block height %d, please use hardfork to bypass it", height))

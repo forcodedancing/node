@@ -25,6 +25,7 @@ import (
 	apiserv "github.com/bnb-chain/node/plugins/api"
 	bridgecmd "github.com/bnb-chain/node/plugins/bridge/client/cli"
 	dexcmd "github.com/bnb-chain/node/plugins/dex/client/cli"
+	migratecmd "github.com/bnb-chain/node/plugins/migrate/client/cli"
 	tokencmd "github.com/bnb-chain/node/plugins/tokens/client/cli"
 	"github.com/bnb-chain/node/version"
 )
@@ -98,6 +99,7 @@ func main() {
 	admin.AddCommands(rootCmd, cdc)
 	bridgecmd.AddCommands(rootCmd, cdc)
 	sidecmd.AddCommands(rootCmd, cdc)
+	migratecmd.AddCommands(rootCmd, cdc)
 
 	// prepare and add flags
 	executor := cli.PrepareMainCmd(rootCmd, "BC", app.DefaultCLIHome)

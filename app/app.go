@@ -4,6 +4,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"fmt"
+	"github.com/bnb-chain/node/plugins/migrate"
 	"io"
 	"math"
 	"os"
@@ -1156,6 +1157,7 @@ func MakeCodec() *wire.Codec {
 	bridge.RegisterWire(cdc)
 	oracle.RegisterWire(cdc)
 	ibc.RegisterWire(cdc)
+	migrate.RegisterWire(cdc)
 	return cdc
 }
 
